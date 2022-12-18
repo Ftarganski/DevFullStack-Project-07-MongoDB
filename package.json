@@ -1,0 +1,37 @@
+{
+  "name": "devfullstack-projeto-08-mongodb",
+  "version": "1.0.0",
+  "description": "Projeto MongoDB Bootcamp",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ftarganski/DevFullStack-Project-08-MongoDB.git"
+  },
+  "keywords": [
+    "MongoDG",
+    "AdminJS",
+    "Node",
+    "Express",
+    "Mongoose",
+    "Typescrit"
+  ],
+  "author": "Francis Targanski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ftarganski/DevFullStack-Project-08-MongoDB/issues"
+  },
+  "homepage": "https://github.com/Ftarganski/DevFullStack-Project-08-MongoDB#readme",
+  "dependencies": {
+    "@adminjs/express": "^5.0.1",
+    "@adminjs/mongoose": "^3.0.1",
+    "@adminjs/sequelize": "^3.0.0",
+    "adminjs": "^6.7.2",
+    "express-mysql-session": "^2.1.8",
+    "mongoose": "^6.8.0",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.27.0"
+  }
+}
