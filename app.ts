@@ -16,6 +16,7 @@ require('dotenv').config()
 const bcrypt = require("bcryptjs");
 const mysqlStore = require("express-mysql-session")(session);
 const { PORT } = process.env
+
 const sessionStore = new mysqlStore({
   connectionLimit: 10,
   password: process.env.SQL_DB_PASS,
