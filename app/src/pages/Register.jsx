@@ -29,9 +29,11 @@ const Register = ({ setCurrentRoute }) => {
                 width: "auto",
                 padding: "15px 0",
               }}
-              src={logo} alt="Logo"/>
-            <Typography variant="h3" component="h2" gutterBottom>
-              Register
+              src={logo}
+              alt="Logo"
+            />
+            <Typography variant="h6" component="h1" gutterBottom>
+              Create your account
             </Typography>
           </Box>
           <TextField
@@ -52,20 +54,20 @@ const Register = ({ setCurrentRoute }) => {
           />
           <Button
             size={"large"}
-            onClick={() => {
-              navigate(`/login`);
-            }}
-          >
-            Login
-          </Button>
-          <Button
-            size={"large"}
             variant={"contained"}
             onClick={() => {
               register(email, password);
             }}
           >
-            Registrar
+            Register
+          </Button>
+          <Button
+            size={"large"}
+            onClick={() => {
+              navigate(`/login`);
+            }}
+          >
+            Login
           </Button>
         </Stack>
       </Grid>

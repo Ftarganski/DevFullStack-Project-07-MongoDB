@@ -29,8 +29,10 @@ const Login = ({ setCurrentRoute }) => {
                 width: "auto",
                 padding: "15px 0",
               }}
-              src={logo} alt="Logo"/>
-            <Typography variant="h3" component="h2" gutterBottom>
+              src={logo}
+              alt="Logo"
+            />
+            <Typography variant="h6" component="h1" gutterBottom>
               Login
             </Typography>
           </Box>
@@ -52,20 +54,20 @@ const Login = ({ setCurrentRoute }) => {
           />
           <Button
             size={"large"}
-            onClick={() => {
-              navigate(`/register`);
-            }}
-          >
-            Register
-          </Button>
-          <Button
-            size={"large"}
             variant={"contained"}
             onClick={() => {
               login(email, password);
             }}
           >
             Login
+          </Button>
+          <Button
+            size={"large"}
+            onClick={() => {
+              navigate(`/register`);
+            }}
+          >
+            Register
           </Button>
         </Stack>
       </Grid>

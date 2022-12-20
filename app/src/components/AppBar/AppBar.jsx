@@ -126,9 +126,9 @@ function AppBarCustom() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="user" src="/static/images/avatar/3.jpg" />
+                <Avatar alt="user" src="" />
               </IconButton>
             </Tooltip>
             <Menu
