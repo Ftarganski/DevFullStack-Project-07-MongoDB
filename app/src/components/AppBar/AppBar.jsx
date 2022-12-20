@@ -16,18 +16,18 @@ import { Link, useNavigate   } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 
 const styleImg = {
-  height: '60px'
+  height: '30px'
 }
 
 const pages = [
   {
-    name: 'Documentos',
+    name: 'Documents',
     link: '/documents'
   }
 ];
 const settings = [
   {
-    name: 'Sair',
+    name: 'Exit',
     func: (navigate) => {
       localStorage.clear();
       navigate('/login');
@@ -128,11 +128,11 @@ function AppBarCustom() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="user" src="/static/images/avatar/3.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: '40px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{

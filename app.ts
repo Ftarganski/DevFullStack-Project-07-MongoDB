@@ -8,8 +8,16 @@ import express from 'express';
 import { Role } from './models/role.entity';
 import { User } from './models/user.entity';
 import { Document } from './models/document.entity';
+
+//CONTROLLERS
 import UserController from './controllers/UserController';
+
+// ROUTES
+import document from './routes/document';
+import auth from './routes/auth';
+
 import session from 'express-session';
+import cors from 'cors';
 
 require('dotenv').config()
 
@@ -50,9 +58,10 @@ const generateResource = (Model: object, properties: any = {}, actions: any = {}
           isVisible: { list: true, edit: false, create: false, show: true }
         }
       },
-      ...actions,
+      actions: {
+        ...actions
+      }
     }
-
   }
 }
 
@@ -105,9 +114,6 @@ const start = async () => {
   }
 
   const admin = new AdminJS(adminOptions)
-
-  // const adminRouter = AdminJSExpress.buildRouter(admin)
-
   const adminRouter = AdminJSExpress.buildAuthenticatedRouter(admin,
     {
       authenticate: async (email, password) => {
@@ -115,7 +121,7 @@ const start = async () => {
         return await userCtrl.login(email, password);
       },
       cookieName: 'adminjs-dash-admin',
-      cookiePassword: '12345678',
+      cookiePassword: '8F!ActmB36YdpTwny!&Gi@Yeh2%PWfHj',
     },
     null,
     {
@@ -130,14 +136,19 @@ const start = async () => {
       name: 'adminjs-dash-admin',
 
     })
+
+  app.use(cors());
+  app.use(express.json());
   app.use(admin.options.rootPath, adminRouter)
+  app.use('/document', document)
+  app.use('/auth', auth)
 
   app.get('/', (req, res) => {
     res.send('=== SYSTEM OK ===')
   })
 
   app.listen(PORT, () => {
-    console.log(`AdminJS started on http://localhost:${PORT}`)
+    console.log(`AdminJS started on http://localhost:${PORT}${admin.options.rootPath}`)
   })
 }
 

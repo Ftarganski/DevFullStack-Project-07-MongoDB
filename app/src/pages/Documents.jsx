@@ -35,17 +35,17 @@ const Documents = ({ setCurrentRoute }) => {
   setCurrentRoute(location.pathname);
 
   const deleteDocument = (id) => {
-    alert(`Editando documento ${id}`);
+    alert(`Editing document ${id}`);
   };
 
   const columns = [
     { headerName: "ID", key: "_id", id: true },
-    { headerName: "Título", key: "title", id: false },
-    { headerName: "Conteúdo", key: "content", id: false },
-    { headerName: "Data", key: "createdAt", id: false },
-    { headerName: "Data", key: "updatedAt", id: false },
+    { headerName: "Title", key: "title", id: false },
+    { headerName: "Contents", key: "content", id: false },
+    { headerName: "Date", key: "createdAt", id: false },
+    { headerName: "Date", key: "updatedAt", id: false },
     {
-      headerName: "Ações",
+      headerName: "Actions",
       action: (params) => {
         return (
           <>
@@ -98,7 +98,7 @@ const Documents = ({ setCurrentRoute }) => {
             {!error && data !== undefined ? (
               <ListViewer {...props} />
             ) : error ? (
-              "Error"
+              "No documents found"
             ) : (
               "No data found"
             )}
@@ -139,7 +139,7 @@ const Documents = ({ setCurrentRoute }) => {
         >
           <Stack spacing={2} alignItems="right">
             <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="limit-page-label">Limite</InputLabel>
+              <InputLabel id="limit-page-label">Limit</InputLabel>
               <Select
                 labelId="limit-page-label"
                 id="limit-page"

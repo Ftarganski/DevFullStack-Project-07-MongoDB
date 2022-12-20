@@ -55,7 +55,7 @@ const Document = ({ setCurrentRoute }) => {
         style={{
           marginBottom: 16,
         }}
-        label={"Título"}
+        label={"Title"}
         fullWidth={true}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -81,7 +81,7 @@ const Document = ({ setCurrentRoute }) => {
         }}
       />
       <Button variant="contained" onClick={updateDocument}>
-        Click
+        Save
       </Button>
     </Box>
   );

@@ -1,42 +1,42 @@
 import { DataTypes, Model, Optional } from 'sequelize'
-import {sequelizeDb as sequelize} from '../db';
+import { sequelizeDb as sequelize } from '../db';
 
-interface IRole{
-    id: number;
-    name: string;
-    createdAt: Date;
-    updatedAt: Date;
+interface IRole {
+  id: number;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export type RoleCreationAttributes = Optional<IRole, 'id'>
 export class Role extends Model<IRole, RoleCreationAttributes> {
-    declare id: number;
-    declare name: string;
-    declare createdAt: Date;
-    declare updatedAt: Date;
-  }
+  declare id: number;
+  declare name: string;
+  declare createdAt: Date;
+  declare updatedAt: Date;
+}
 
-  Role.init(
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      name: {
-        type: new DataTypes.STRING(128),
-        allowNull: false,
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-      },
+Role.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
-    {
-      sequelize,
-      tableName: 'roles',
-      modelName: 'role',
-    }
-  )
+    name: {
+      type: new DataTypes.STRING(255),
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+    },
+  },
+  {
+    sequelize,
+    tableName: 'roles',
+    modelName: 'role',
+  }
+)

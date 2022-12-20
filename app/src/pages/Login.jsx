@@ -25,14 +25,13 @@ const Login = ({ setCurrentRoute }) => {
           >
             <img
               style={{
-                height: "80px",
+                height: "50px",
                 width: "auto",
                 padding: "15px 0",
               }}
-              src={logo}
-            />
-            <Typography variant="h4" component="h1" gutterBottom>
-              Entrar
+              src={logo} alt="Logo"/>
+            <Typography variant="h3" component="h2" gutterBottom>
+              Login
             </Typography>
           </Box>
           <TextField
