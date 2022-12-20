@@ -15,6 +15,13 @@ class DocumentController extends GenericController {
         }
     }
 
+    async deleteDocument(_id: string){
+        await Document.deleteOne({ _id: _id });
+        return {
+            status: 200
+        }
+    }
+
     async getDocument(_id: string) {
         const document = await Document.findById(_id);
 

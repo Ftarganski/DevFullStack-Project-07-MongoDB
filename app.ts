@@ -18,6 +18,8 @@ import auth from './routes/auth';
 
 import session from 'express-session';
 import cors from 'cors';
+import hbs from 'hbs';
+const path = require('node:path');
 
 require('dotenv').config()
 
@@ -34,6 +36,8 @@ const sessionStore = new mysqlStore({
   port: process.env.SQL_DB_PORT,
   createDatabaseTable: true
 })
+
+const ROOT_DIR = __dirname
 
 AdminJS.registerAdapter({
   Resource: AdminSequelize.Resource,
@@ -73,15 +77,6 @@ const start = async () => {
       generateResource(Role),
       generateResource(User,
         {
-          id: {
-            isVisible: { list: false, edit: false }
-          },
-          email: {
-            isVisible: { list: false, edit: false }
-          },
-          username: {
-            isVisible: { list: false, edit: false }
-          },
           password: {
             type: 'password'
           }
@@ -139,6 +134,8 @@ const start = async () => {
 
   app.use(cors());
   app.use(express.json());
+  hbs.registerPartials(path.join(ROOT_DIR, 'views'))
+  app.set('view engine', '.hbs')
   app.use(admin.options.rootPath, adminRouter)
   app.use('/document', document)
   app.use('/auth', auth)

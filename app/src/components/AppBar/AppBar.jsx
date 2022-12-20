@@ -1,39 +1,40 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import { Link, useNavigate   } from 'react-router-dom';
-
-import logo from '../../assets/img/logo.png';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../services/auth";
+import logo from "../../assets/img/logo.png";
 
 const styleImg = {
-  height: '30px'
-}
+  height: "30px",
+};
 
 const pages = [
   {
-    name: 'Documents',
-    link: '/documents'
-  }
+    name: "Documents",
+    link: "/documents",
+  },
 ];
-const settings = [
-  {
-    name: 'Exit',
-    func: (navigate) => {
-      localStorage.clear();
-      navigate('/login');
-    }
-  }
-];
+
+// const settings = [
+//   {
+//     name: 'Exit',
+//     func: (navigate) => {
+//       localStorage.clear();
+//       navigate('/login');
+//     }
+//   }
+// ];
 
 function AppBarCustom() {
   const navigate = useNavigate();
@@ -56,15 +57,18 @@ function AppBarCustom() {
   };
 
   return (
-    <AppBar position="static" sx={{
-      backgroundColor: "#fff"
-    }}>
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: "#fff",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-            <img style={styleImg} src={logo} alt="Logo"/>
+          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+            <img style={styleImg} src={logo} alt="Logo" />
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -79,38 +83,46 @@ function AppBarCustom() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.name} onClick={() => {
-                  navigate(page.link);
-                  handleCloseNavMenu()
-                }}>
-                  <Link to={page.link}> 
-                    <Typography textAlign="center" sx={{
-                      color: "#000"
-                    }}>{page.name}</Typography>
+                <MenuItem
+                  key={page.name}
+                  onClick={() => {
+                    navigate(page.link);
+                    handleCloseNavMenu();
+                  }}
+                >
+                  <Link to={page.link}>
+                    <Typography
+                      textAlign="center"
+                      sx={{
+                        color: "#000",
+                      }}
+                    >
+                      {page.name}
+                    </Typography>
                   </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none', flexGrow: 1 }, mr: 1 }}>
-              <img style={styleImg} src={logo} alt="Logo"/>
+          <Box sx={{ display: { xs: "flex", md: "none", flexGrow: 1 }, mr: 1 }}>
+            <img style={styleImg} src={logo} alt="Logo" />
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page.name}
@@ -118,7 +130,7 @@ function AppBarCustom() {
                   navigate(page.link);
                   handleCloseNavMenu();
                 }}
-                sx={{ my: 2, color: '#000', display: 'block' }}
+                sx={{ my: 2, color: "#000", display: "block" }}
               >
                 {page.name}
               </Button>
@@ -132,29 +144,29 @@ function AppBarCustom() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '40px' }}
+              sx={{ mt: "40px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting.name} onClick={() => {
-                  setting.func(navigate)
-                  handleCloseUserMenu()
-                }}>
-                  <Typography textAlign="center">{setting.name}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem
+                onClick={() => {
+                  handleCloseUserMenu();
+                  logout(navigate);
+                }}
+              >
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

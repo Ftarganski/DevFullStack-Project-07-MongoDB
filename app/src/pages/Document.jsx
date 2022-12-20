@@ -3,8 +3,9 @@ import useSWR from "swr";
 import { TextField } from "../components";
 import { Editor } from "@tinymce/tinymce-react";
 
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
+import { userIsLoggedIn } from "../services/auth";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -12,6 +13,7 @@ const Document = ({ setCurrentRoute }) => {
   const editorRef = useRef(null);
   const location = useLocation();
   const params = useParams();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -44,6 +46,10 @@ const Document = ({ setCurrentRoute }) => {
   useEffect(() => {
     loadingDocument();
   }, [data]);
+
+  useEffect(() => {
+    userIsLoggedIn(navigate, null);
+  }, []);
 
   return (
     <Box

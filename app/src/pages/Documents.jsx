@@ -12,7 +12,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ListViewer from "../components/ListViewer/ListViewer";
 import { Edit, Delete } from "@mui/icons-material";
 import useSWR from "swr";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getUser, userIsLoggedIn } from "../services/auth";
+import axios from "axios";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -21,9 +23,7 @@ const Documents = ({ setCurrentRoute }) => {
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const user = {
-    id: 6,
-  };
+  const user = getUser();
 
   const { data, error, isLoading } = useSWR(
     `http://localhost:3001/document?user_id=${user.id}&page=${page}&limit=${limit}`,
@@ -34,16 +34,32 @@ const Documents = ({ setCurrentRoute }) => {
   const location = useLocation();
   setCurrentRoute(location.pathname);
 
-  const deleteDocument = (id) => {
-    alert(`Editing document ${id}`);
+  const deleteDocument = async (id) => {
+    const conf = window.confirm("Are you sure you want to delete?");
+
+    if (conf) {
+      try {
+        await axios({
+          method: "delete",
+          url: `http://localhost:3001/document/${id}`,
+          headers: { "Content-Type": "application/json" },
+        });
+        alert("Document deleted successfully!");
+      } catch (err) {
+        alert("Error deleting document.");
+      }
+    }
   };
+
+  useEffect(() => {
+    userIsLoggedIn(navigate, null);
+  }, []);
 
   const columns = [
     { headerName: "ID", key: "_id", id: true },
     { headerName: "Title", key: "title", id: false },
-    { headerName: "Contents", key: "content", id: false },
-    { headerName: "Date", key: "createdAt", id: false },
-    { headerName: "Date", key: "updatedAt", id: false },
+    { headerName: "Created At", key: "createdAt", id: false },
+    { headerName: "Deleted At", key: "updatedAt", id: false },
     {
       headerName: "Actions",
       action: (params) => {
@@ -98,7 +114,7 @@ const Documents = ({ setCurrentRoute }) => {
             {!error && data !== undefined ? (
               <ListViewer {...props} />
             ) : error ? (
-              "No documents found"
+              "An error has occurred."
             ) : (
               "No data found"
             )}

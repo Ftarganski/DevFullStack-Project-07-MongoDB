@@ -1,23 +1,44 @@
-import axios from 'axios';
+import axios from "axios";
+import { redirect } from "react-router-dom";
 
-const login  = async (email, password) => {
-    return await axios({
-        method: "post",
-        url: `http://localhost:3001/auth/login`,
-        data: { email, password },
-        headers: { 'Content-Type': 'application/json' }
-    });
-}
+const userIsLoggedIn = (navigate, route) => {
+  const user = JSON.parse(window.localStorage.getItem("user"));
+  if (user) {
+    if (route === "/login" || route === "/register") {
+      navigate("/");
+    }
+  } else {
+    if (route !== "/login" && route !== "/register") {
+      navigate("/login");
+    }
+  }
+};
 
-const register  = async (email, password) => {
-    return await axios({
-        method: "post",
-        url: `http://localhost:3001/auth/register`,
-        data: { email, password },
-        headers: { 'Content-Type': 'application/json' }
-    });
-}
+const logout = (navigate) => {
+  window.localStorage.clear();
+  navigate("/login");
+};
 
-export {
-    login, register
-}
+const login = async (userEmail, password) => {
+  return await axios({
+    method: "post",
+    url: `http://localhost:3001/auth/login`,
+    data: { userEmail, password },
+    headers: { "Content-Type": "application/json" },
+  });
+};
+
+const register = async (username, name, email, password) => {
+  return await axios({
+    method: "post",
+    url: `http://localhost:3001/auth/register`,
+    data: { username, name, email, password },
+    headers: { "Content-Type": "application/json" },
+  });
+};
+
+const getUser = () => {
+  return JSON.parse(window.localStorage.getItem("user"));
+};
+
+export { login, register, userIsLoggedIn, getUser, logout };
