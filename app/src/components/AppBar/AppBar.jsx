@@ -26,15 +26,6 @@ const pages = [
   },
 ];
 
-// const settings = [
-//   {
-//     name: 'Exit',
-//     func: (navigate) => {
-//       localStorage.clear();
-//       navigate('/login');
-//     }
-//   }
-// ];
 
 function AppBarCustom() {
   const navigate = useNavigate();

@@ -6,11 +6,12 @@ import {
   Select,
   MenuItem,
   FormControl,
+  Fab,
   InputLabel,
 } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import ListViewer from "../components/ListViewer/ListViewer";
-import { Edit, Delete } from "@mui/icons-material";
+import { Add, Edit, Delete } from "@mui/icons-material";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { getUser, userIsLoggedIn } from "../services/auth";
@@ -35,7 +36,7 @@ const Documents = ({ setCurrentRoute }) => {
   setCurrentRoute(location.pathname);
 
   const deleteDocument = async (id) => {
-    const conf = window.confirm("Are you sure you want to delete?");
+    const conf = window.confirm("Tem certeza que deseja deletar?");
 
     if (conf) {
       try {
@@ -44,9 +45,9 @@ const Documents = ({ setCurrentRoute }) => {
           url: `http://localhost:3001/document/${id}`,
           headers: { "Content-Type": "application/json" },
         });
-        alert("Document deleted successfully!");
+        alert("Documento deletado com sucesso!!!");
       } catch (err) {
-        alert("Error deleting document.");
+        alert("Erro ao deletar documento.");
       }
     }
   };
@@ -174,6 +175,18 @@ const Documents = ({ setCurrentRoute }) => {
           </Stack>
         </Grid>
         <Grid item xs={0} md={1}></Grid>
+        <Fab
+          onClick={() => navigate("/document")}
+          color="primary"
+          aria-label="add"
+          sx={{
+            position: "fixed",
+            right: 16,
+            bottom: 16,
+          }}
+        >
+          <Add />
+        </Fab>
       </Grid>
     </>
   );

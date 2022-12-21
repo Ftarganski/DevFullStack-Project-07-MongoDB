@@ -37,6 +37,10 @@ function App() {
             element={<Document setCurrentRoute={setCurrentRoute} />}
           />
           <Route
+            path="/document"
+            element={<Document setCurrentRoute={setCurrentRoute} />}
+          />
+          <Route
             path="/login"
             element={<Login setCurrentRoute={setCurrentRoute} />}
           />
